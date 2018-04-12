@@ -246,7 +246,16 @@
         },
 
         updatePosition(oldIndex, newIndex) {
-          const updatePosition = list => list.splice(newIndex, 0, list.splice(oldIndex, 1)[0])
+          const updatePosition = list => {
+            if (this.options.swap) {
+              var b = list[oldIndex];
+              list[oldIndex] = list[newIndex];
+              list[newIndex] = b;
+              return list;
+            } else {
+              return  list.splice(newIndex, 0, list.splice(oldIndex, 1)[0])
+            }
+          };
           this.alterList(updatePosition)
         },
 
@@ -325,6 +334,10 @@
           insertNodeAt(evt.from, evt.item, evt.oldIndex)
           const oldIndex = this.context.index
           const newIndex = this.getVmIndex(evt.newIndex)
+          if (this.options.swap) {
+            removeNode(evt.to);
+            insertNodeAt(evt.from, evt.to, evt.newIndex);
+          }
           this.updatePosition(oldIndex, newIndex)
           const moved = { element: this.context.element, oldIndex, newIndex }
           this.emitChanges({ moved })
