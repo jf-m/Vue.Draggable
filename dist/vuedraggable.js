@@ -365,7 +365,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
           removeNode(evt.item);
           insertNodeAt(evt.from, evt.item, evt.oldIndex);
           var oldIndex = this.context.index;
-          var newIndex = this.getVmIndex(evt.newIndex);
+          var newIndex = evt.newIndex;
           if (this.options.swap) {
             removeNode(evt.to);
             insertNodeAt(evt.from, evt.to, evt.newIndex);

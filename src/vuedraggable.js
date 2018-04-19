@@ -330,17 +330,17 @@
         },
 
         onDragUpdate(evt) {
-          removeNode(evt.item)
-          insertNodeAt(evt.from, evt.item, evt.oldIndex)
-          const oldIndex = this.context.index
-          const newIndex = this.getVmIndex(evt.newIndex)
+          removeNode(evt.item);
+          insertNodeAt(evt.from, evt.item, evt.oldIndex);
+          var oldIndex = this.context.index;
+          var newIndex = evt.newIndex;
           if (this.options.swap) {
             removeNode(evt.to);
             insertNodeAt(evt.from, evt.to, evt.newIndex);
           }
-          this.updatePosition(oldIndex, newIndex)
-          const moved = { element: this.context.element, oldIndex, newIndex }
-          this.emitChanges({ moved })
+          this.updatePosition(oldIndex, newIndex);
+          var moved = {element: this.context.element, oldIndex: oldIndex, newIndex: newIndex};
+          this.emitChanges({moved: moved});
         },
 
         computeFutureIndex(relatedContext, evt) {
